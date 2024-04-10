@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Review</title>
+</head>
+<body>
+    {% if request.user.is_authenticated %}
+    <p><a href="{% url 'user_logout' %}">Logout</a></p>
+    {% endif %}
+    <h1>Welcome, {{ request.user.username }}</h1>
+
+    <h2>Review Homework</h2>
+    <p>{{homework}}</p>
+    <p>Submitted by : {{homework.student.first_name}} {{homework.student.last_name}}</p>
+    <p>{{homework.submission_date}}</p>
+    <p>{{homework.file}}</p>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Submit Review</button>
+    </form>
+
+</body>
+</html>
